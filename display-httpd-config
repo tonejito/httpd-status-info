@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# ./display-httpd-config
+# 
+# Andres Hernandez - tonejito_AT_comunidad_DOT_unam_DOT_mx
+# Display Apache HTTPD loaded config using mod_info and links
+# Released under the BSD License
+
+for bin in which echo links sed
+do
+  if [ ! -x "`which $bin`" ]
+  then
+    exit 1
+  fi
+done
+
+echo "# vim: syntax=apache sr noet hlsearch"
+links -dump 'http://localhost/server-info?config' | sed -f ./conf.sed
