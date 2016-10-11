@@ -15,4 +15,5 @@ do
 done
 
 echo "# vim: syntax=apache sr noet hlsearch"
-links -dump 'http://localhost/server-info?config' | sed -f ./conf.sed
+links -dump 'http://localhost/server-info?config' | sed -f ./display-httpd-config.sed
+
