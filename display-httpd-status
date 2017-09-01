@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# ./display-httpd-status
+# 
+# Andres Hernandez - tonejito
+# Display Apache HTTPD status using mod_status and links
+# Released under the BSD License
+
+for bin in which links tee
+do
+  if [ ! -x "`which $bin`" ]
+  then
+    exit 1
+  fi
+done
+
+links -dump 'http://localhost/server-status' | \
+tee httpd.status

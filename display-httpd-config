@@ -2,11 +2,11 @@
 #
 # ./display-httpd-config
 # 
-# Andres Hernandez - tonejito_AT_comunidad_DOT_unam_DOT_mx
+# Andres Hernandez - tonejito
 # Display Apache HTTPD loaded config using mod_info and links
 # Released under the BSD License
 
-for bin in which echo links sed
+for bin in which echo links sed tee
 do
   if [ ! -x "`which $bin`" ]
   then
@@ -14,5 +14,10 @@ do
   fi
 done
 
-echo "# vim: syntax=apache sr noet hlsearch"
-links -dump -width 256 'http://localhost/server-info?config' | sed -f ./display-httpd-config.sed
+# Send all of this output through the pipe
+(
+  echo "# vim: syntax=apache sr noet hlsearch"
+  links -dump -width 256 'http://localhost/server-info?config'
+) | \
+sed -f ./display-httpd-config.sed | \
+tee httpd.config
