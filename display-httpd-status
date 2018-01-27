@@ -6,7 +6,7 @@
 # Display Apache HTTPD status using mod_status and links
 # Released under the BSD License
 
-for bin in which links tee
+for bin in which links grep tee
 do
   if [ ! -x "`which $bin`" ]
   then
@@ -15,4 +15,5 @@ do
 done
 
 links -dump 'http://localhost/server-status' | \
+grep -v 'OPTIONS \* HTTP/1.0' | \
 tee httpd.status
