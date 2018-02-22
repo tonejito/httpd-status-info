@@ -1,0 +1,15 @@
+# mod_rewrite exceptions for mod_status and mod_info
+# https://serverfault.com/a/168184
+# https://www.drupal.org/node/52511#comment-6764214
+
+# Put this AT THE TOP of ${DocumentRoot}/.htaccess
+
+<IfModule rewrite_module>
+  RewriteEngine on
+  <IfModule status_module>
+    RewriteRule  ^server-status  -  [L]
+  </IfModule>
+  <IfModule info_module>
+    RewriteRule  ^server-info    -  [L]
+  </IfModule>
+</IfModule>
